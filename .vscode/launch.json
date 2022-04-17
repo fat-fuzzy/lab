@@ -1,0 +1,77 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Server",
+			"runtimeArgs": ["dev:server", "--preserve-symlinks"],
+			"runtimeExecutable": "pnpm",
+			"skipFiles": ["<node_internals>/**"],
+			"program": "${workspaceFolder}/packages/api/server.ts",
+			"serverReadyAction": {
+				"pattern": "listening on port ([0-9]+)",
+				"uriFormat": "https://localhost:%s",
+				"action": "debugWithChrome",
+				"webRoot": "${workspaceFolder}/packages/api/"
+			}
+		},
+		{
+			"type": "pwa-node",
+			"request": "launch",
+			"name": "Client",
+			"runtimeArgs": ["dev:client"],
+			"runtimeExecutable": "pnpm",
+			"url": "https://localhost:3000",
+			"webRoot": "${workspaceFolder}/packages/client/"
+		},
+		{
+			"type": "pwa-node",
+			"request": "launch",
+			"name": "Components",
+			"runtimeArgs": ["dev:components"],
+			"runtimeExecutable": "pnpm",
+			"url": "https://localhost:3002",
+			"webRoot": "${workspaceFolder}/packages/components/"
+		},
+		{
+			"type": "pwa-node",
+			"request": "launch",
+			"name": "Storybook",
+			"runtimeArgs": ["dev:sb"],
+			"runtimeExecutable": "pnpm",
+			"url": "https://localhost:6006",
+			"webRoot": "${workspaceFolder}/packages/components/"
+		},
+		{
+			"type": "pwa-node",
+			"request": "launch",
+			"name": "Design",
+			"runtimeArgs": ["dev:design"],
+			"runtimeExecutable": "pnpm",
+			"url": "https://localhost:8080",
+			"webRoot": "${workspaceFolder}/packages/design/"
+		},
+		{
+			"type": "node",
+			"request": "attach",
+			"name": "Attach to Remote",
+			"address": "localhost",
+			"protocol": "legacy",
+			"port": 9229,
+			"localRoot": "${workspaceRoot}/packages/api/",
+			"remoteRoot": "/opt/app-root/src/packages/api"
+		}
+	],
+	"compounds": [
+		{
+			"name": "Server/Client",
+			"configurations": ["Server", "Client"],
+			"preLaunchTask": "buildComponents",
+			"stopAll": true
+		}
+	]
+}
