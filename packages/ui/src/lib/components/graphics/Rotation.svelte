@@ -22,5 +22,5 @@
 <Fieldset {legend} {size}>
 	<!--https://css-tricks.com/accessible-svgs/-->
 	<!-- <svg id="InteractiveSVG" role="group" /> -->
-	<InputRange bind:value={angle} {label} {max} on:input={update} layout="stack" {size} />
+	<InputRange bind:value={angle} {label} {max} on:input={update} {size} />
 </Fieldset>

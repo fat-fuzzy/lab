@@ -28,20 +28,6 @@
 </script>
 
 <Fieldset {legend} {size}>
-	<InputRange
-		bind:value={coordX}
-		label="{`${label} `}x"
-		max={maxX}
-		on:input={updateX}
-		layout="stack"
-		{size}
-	/>
-	<InputRange
-		bind:value={coordY}
-		label="{`${label} `}y"
-		max={maxY}
-		on:input={updateY}
-		layout="stack"
-		{size}
-	/>
+	<InputRange bind:value={coordX} label="{`${label} `}x" max={maxX} on:input={updateX} {size} />
+	<InputRange bind:value={coordY} label="{`${label} `}y" max={maxY} on:input={updateY} {size} />
 </Fieldset>

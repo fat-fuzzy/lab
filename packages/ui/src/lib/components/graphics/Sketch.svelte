@@ -6,7 +6,7 @@
 
 	export let scene
 	export let title: string
-	export let dimensions: string
+	export let dimensions = 'video'
 	export let layer = 'layer' // if 'layer' the canvas will appear on a layer (with drop shadow)
 
 	let canvas: HTMLCanvasElement
@@ -36,10 +36,10 @@
 	// TODO clean gl data when switching animations
 </script>
 
-<article class="l:sidebar">
+<article class="l:sidebar:xxs">
 	<div class="l:main">
 		<div
-			class={`l:frame ${dimensions} ${layer}`}
+			class={`l:frame:${dimensions} ${layer}`}
 			bind:offsetWidth={width}
 			bind:offsetHeight={height}
 		>
@@ -49,7 +49,7 @@
 		</div>
 		<Player {scene} />
 	</div>
-	<aside class={showDetails ? 'l:side:xxs' : 'hide:rm-node'}>
+	<aside class={showDetails ? 'l:side' : 'hide:rm-node'}>
 		<details open>
 			<summary class={`card:sm box:${variant}`}> Details </summary>
 			{#if geometry}

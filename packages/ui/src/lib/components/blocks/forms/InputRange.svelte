@@ -15,7 +15,7 @@
 	export let breakpoint = ''
 	export let size = ''
 	export let align = ''
-	export let items: any[]
+	export let items: any[] = []
 	let layout = 'stack'
 
 	let valueLabel = value
@@ -32,7 +32,7 @@
 	}
 
 	function handleInput(event) {
-		if (items) {
+		if (items.length) {
 			let selectedMarker = markers.find((m) => m.value === value)
 			if (selectedMarker) {
 				valueLabel = selectedMarker.label
@@ -55,7 +55,7 @@
 		'75': 'lg',
 		'100': 'xl',
 	}
-	if (items) {
+	if (items.length) {
 		step = (max - min) / (items.length - 1)
 		generateStepsFromItems(items)
 		// Set default number value if nojs
@@ -65,7 +65,7 @@
 
 	$: classes = `l:${layout}:${size} bp:${breakpoint} ${size} ${color} ${variant} ${align}`
 	$: {
-		if (items) {
+		if (items.length) {
 			let selectedMarker = markers.find((m) => m.label === value)
 			if (selectedMarker) {
 				value = selectedMarker.value
@@ -95,7 +95,7 @@
 			on:input={handleInput}
 			list={items ? 'markers' : undefined}
 		/>
-		{#if items}
+		{#if items.length}
 			<datalist id="markers">
 				{#each markers as { id, label, value }}
 					<option {id} {label} {value} />

@@ -36,7 +36,6 @@
 		min={minX}
 		max={maxX}
 		on:input={updateX}
-		layout="stack"
 		{size}
 	/>
 	<InputRange
@@ -45,7 +44,6 @@
 		min={minY}
 		max={maxY}
 		on:input={updateY}
-		layout="stack"
 		{size}
 	/>
 </Fieldset>
