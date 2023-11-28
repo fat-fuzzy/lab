@@ -5,6 +5,7 @@
 	import {clickOutside} from '$lib/utils/click-outside.js'
 	import Expand from '$lib/components/blocks/buttons/Expand.svelte'
 	import Switch from '$lib/components/blocks/buttons/Switch.svelte'
+	// import Svg from '$lib/components/blocks/global/Svg.svelte'
 
 	import * as settings from '$lib/stores/settings'
 	import {assets} from '$types/constants.js'
@@ -188,6 +189,7 @@
 						rel="noreferrer"
 					>
 						<!---TODO: Manage svg assets as SVGs -->
+						<!-- <Svg {asset} {size} {color} /> -->
 						<img src={assetValue} alt={title} class={`${id} ${asset}`} />
 					</a>
 				</li>

@@ -1,14 +1,14 @@
 /**
  * Load data from markdown files
  * @param pathPrefix relative path from this folder to markdown assets
- * @param markdownImports markdown default imports
+ * @param imports markdown default imports
  * @returns { path, html, id, slug } frontmatter metadata and path of markdown files to load
  */
-const fetchMarkdowns = async (pathPrefix: string, imports: any) => {
-	const logImports = Object.entries(imports)
-	const logs = await Promise.all(
+const importMarkdowns = async (pathPrefix: string, imports: any) => {
+	const markdownImports = Object.entries(imports)
+	const markdowns = await Promise.all(
 		// TODO: understand this vite functionality
-		logImports.map(async ([path, resolver]) => {
+		markdownImports.map(async ([path, resolver]) => {
 			const result: any = await resolver()
 
 			const filePath = path.slice(pathPrefix.length, -3) // removes pathPrefix and '*.md'
@@ -20,7 +20,7 @@ const fetchMarkdowns = async (pathPrefix: string, imports: any) => {
 			}
 		}),
 	)
-	return logs
+	return markdowns
 }
 
 function sortByTitleAsc(a, b) {
@@ -35,4 +35,4 @@ function sortByIdAsc(a, b) {
 function sortByIdDesc(a, b) {
 	return a.meta.id > b.meta.id ? -1 : b.meta.id > a.meta.id ? 1 : 0
 }
-export default {fetchMarkdowns, sortByTitleDesc, sortByIdDesc}
+export default {importMarkdowns, sortByTitleDesc, sortByIdDesc}

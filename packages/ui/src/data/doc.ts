@@ -11,8 +11,8 @@ const blocksImports = import.meta.glob('/src/assets/doc/blocks/*.md')
 
 async function fetchMarkdowns() {
 	const [categories, blocks] = await Promise.all([
-		markdownUtils.fetchMarkdowns(categoryPrefix, categoryImports),
-		markdownUtils.fetchMarkdowns(blocksPathPrefix, blocksImports),
+		markdownUtils.importMarkdowns(categoryPrefix, categoryImports),
+		markdownUtils.importMarkdowns(blocksPathPrefix, blocksImports),
 	])
 	return {
 		categories: categories.sort(markdownUtils.sortByTitleDesc),
