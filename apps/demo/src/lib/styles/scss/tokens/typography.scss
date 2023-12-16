@@ -1,0 +1,100 @@
+// == TYPOGRAPHIC SCALE
+// See: https://piccalil.li/tutorial/improve-the-readability-of-the-content-on-your-website/
+
+/*
+* --ratio: 1.5;
+* --s-5: calc(var(--s-4) / var(--ratio));
+* --s-4: calc(var(--s-3) / var(--ratio));
+* --s-3: calc(var(--s-2) / var(--ratio));
+* --s-2: calc(var(--s-1) / var(--ratio));
+* --s-1: calc(var(--s0) / var(--ratio));
+* --s0: 1rem;
+* --s1: calc(var(--s0) * var(--ratio));
+* --s2: calc(var(--s1) * var(--ratio));
+* --s3: calc(var(--s2) * var(--ratio));
+* --s4: calc(var(--s3) * var(--ratio));
+* --s5: calc(var(--s4) * var(--ratio));
+*/
+
+// == FLUID SCALE
+
+/**
+ * Source: https://utopia.fyi/blog/css-modular-scales/
+ * Usage:
+ *  TODO: Doc + link to mixin generate-modular-scale
+ */
+
+$typography: (
+	// == Font families
+	font-family-serif: #{'Trirong',
+	serif},
+	font-family-heading: #{'Marianne',
+	arial,
+	sans-serif},
+	font-family-subheading: #{'Marianne',
+	arial,
+	sans-serif},
+	font-family-sans: #{'Marianne',
+	arial,
+	sans-serif},
+	font-family-mono: #{'Anonymous Pro',
+	monospace},
+	font-family-base: var(--font-family-sans),
+	//
+	font-family-h1: var(--font-family-heading),
+	font-family-h2: var(--font-family-subheading),
+	font-family-h3: var(--font-family-subheading),
+	font-family-h4: var(--font-family-subheading),
+	font-family-h5: var(--font-family-subheading),
+	font-family-body: var(--font-family-base),
+	font-family-code: var(--font-family-mono),
+	font-family-ui: var(--font-family-sans),
+	// == Font weight
+	font-weight-800: 800,
+	font-weight-700: 700,
+	font-weight-600: 600,
+	font-weight-500: 500,
+	font-weight-400: 400,
+	font-weight-300: 300,
+	font-weight-200: 200,
+	font-weight-100: 100,
+	//
+	font-weight-bold: 800,
+	font-weight-semibold: 600,
+	font-weight-medium: 500,
+	font-weight-base: 200,
+	font-weight-light: 200,
+	//
+	font-weight-h1: var(--font-weight-bold),
+	font-weight-h2: var(--font-weight-semibold),
+	font-weight-h3: var(--font-weight-semibold),
+	font-weight-h4: var(--font-weight-medium),
+	font-weight-h5: var(--font-weight-medium),
+	font-weight-body: var(--font-weight-medium),
+	font-weight-code: var(--font-weight-medium),
+	font-weight-ui: var(--font-weight-semibold),
+	// == Font size
+	font-size-h1: var(--fluid-4),
+	font-size-h2: var(--fluid-3),
+	font-size-h3: var(--fluid-2),
+	font-size-h4: var(--fluid-1),
+	font-size-h5: var(--fluid-0),
+	font-size-body: var(--fluid-0),
+	font-size-code: var(--fluid-0),
+	font-size-ui: var(--fluid-0),
+	font-size-small: var(--fluid--1),
+	//
+	font-size-xxl: var(--fluid-3),
+	font-size-xl: var(--fluid-2),
+	font-size-lg: var(--fluid-1),
+	font-size-md: var(--fluid-0),
+	font-size-sm: var(--fluid--1),
+	font-size-xs: var(--fluid--2),
+	font-size-xxs: var(--fluid--3),
+	// == Font color
+	font-color-base: var(--color-dark),
+	//
+	line-height-heading: 1.4,
+	line-height-ui: 1.4,
+	line-height-body: 2
+);

@@ -1,0 +1,94 @@
+$breakpoints: (
+	bp-xxs: 320px,
+	bp-xs: 768px,
+	bp-sm: 992px,
+	bp-md: 1240px,
+	bp-lg: 1620px,
+	bp-xl: 2048px,
+	bp-xxl: 3048px,
+);
+$base-sidebar-size: 22.75em;
+$layout: (
+	gap: 1rem,
+	size-nul: 0,
+	size-xxs: var(--s-5),
+	size-xs: var(--s-4),
+	size-sm: var(--s-3),
+	size-md: var(--s-2),
+	size-lg: var(--s-1),
+	size-xl: var(--s0),
+	size-xxl: var(--s1),
+	// Inverse sizes: use when size must be inversely proportional to class name
+	size-inverse-xxs: var(--size-xxl),
+	size-inverse-xs: var(--size-xl),
+	size-inverse-sm: var(--size-lg),
+	size-inverse-md: var(--size-md),
+	size-inverse-lg: var(--size-sm),
+	size-inverse-xl: var(--size-xs),
+	size-inverse-xxl: var(--size-xxs),
+	/// Test SIZE SCALE for sidebar width
+	/// This is a Major Third scale that powers all the utilities that
+	/// it is relevant for (font-size, margin, padding). All items are
+	/// calculated off the base size, so change that and cascade across
+	/// your whole project.
+	///
+	///
+	sidebar-width-xxs: $base-sidebar-size * 0.6,
+	sidebar-width-xs: $base-sidebar-size * 0.7,
+	sidebar-width-sm: $base-sidebar-size * 0.8,
+	sidebar-width-md: $base-sidebar-size,
+	sidebar-width-lg: $base-sidebar-size * 1.25,
+	sidebar-width-xl: $base-sidebar-size * 1.6,
+	sidebar-width-xxl: $base-sidebar-size * 2,
+
+	// == Header and Footer
+	// Header button icon height
+	header-icon-height: 2.25rem,
+	header-height: var(--s3),
+	header-margin: calc(var(--gap) / 2),
+	// footer height = font-size * line-height + 2 * padding
+	footer-height: calc(var(--font-size-body) * var(--ratio) + 2 * var(--size-sm)),
+	// == Radius
+	radius-nul: 0,
+	radius-base: 0.16rem,
+	radius-lg: 0.34rem,
+	radius-xl: 0.66rem,
+
+	// == Outlines and Borders
+	border-width: 1px,
+	border-width-lg: 2px,
+	border-width-xl: 4px,
+	outline-offset: 0.25rem,
+	outline-offset-nav: 0.15rem,
+	outline-width: 2px,
+	prev-offset-limit: calc(calc(var(--outline-offset) + var(--outline-width))),
+	// == Layers
+	z-index-inset: 0,
+	z-index-reveal: 1,
+	z-index-layer: 2,
+	z-index-sticky: 3,
+
+	// src: https://github.com/argyleink/open-props/blob/main/src/props.shadows.css
+	// using shadow-3
+	day-shadow: #{0 -1px 3px 0 hsl(var(--day-color-shadow) / calc(var(--shadow-strength) + 2%)),
+	0 1px 2px -5px hsl(var(--day-color-shadow) / calc(var(--shadow-strength) + 2%)),
+	0 2px 5px -5px hsl(var(--day-color-shadow) / calc(var(--shadow-strength) + 4%)),
+	0 4px 12px -5px hsl(var(--day-color-shadow) / calc(var(--shadow-strength) + 5%)),
+	0 12px 15px -5px hsl(var(--day-color-shadow) / calc(var(--shadow-strength) + 7%)),
+	},
+	night-shadow: #{0 -1px 3px 0 hsl(var(--night-color-shadow) / calc(var(--shadow-strength) + 2%)),
+	0 1px 2px -5px hsl(var(--night-color-shadow) / calc(var(--shadow-strength) + 2%)),
+	0 2px 5px -5px hsl(var(--night-color-shadow) / calc(var(--shadow-strength) + 4%)),
+	0 4px 12px -5px hsl(var(--night-color-shadow) / calc(var(--shadow-strength) + 5%)),
+	0 12px 15px -5px hsl(var(--night-color-shadow) / calc(var(--shadow-strength) + 7%)),
+	},
+	day-shadow-inset-1: #{inset 0 1px 4px 0
+		hsl(var(--day-color-shadow) / calc(var(--shadow-strength-inset-1) + 9%))},
+	day-shadow-inset-2: #{inset 0 1px 4px 0
+		hsl(var(--day-color-shadow) / calc(var(--shadow-strength-inset-2) + 9%))},
+	night-shadow-inset-1: #{inset 0 1px 4px 0
+		hsl(var(--night-color-shadow) / calc(var(--shadow-strength-inset-1) + 9%))},
+	night-shadow-inset-2: #{inset 0 1px 4px 0
+		hsl(var(--night-color-shadow) / calc(var(--shadow-strength-inset-2) + 9%))},
+	padding-inset: 4px,
+);

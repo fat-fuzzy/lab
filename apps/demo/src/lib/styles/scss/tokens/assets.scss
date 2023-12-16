@@ -1,0 +1,66 @@
+$bunny: '☼';
+$hat: '☽';
+$bulb: '❢';
+$confetti: '➶';
+$bell: '⊛';
+$poop: '✖︎';
+$sun: '☼';
+$moon: '☽';
+$new-moon: '⦾';
+$half-moon: '⦿';
+$invader: '♘';
+$octopus: '♙';
+$spouting-whale: '♖';
+$lion: '♗';
+$heart: '❤️';
+$sparkles: '✧';
+$egg: '☆';
+$chick: '✪';
+$ruler: '☄︎';
+$link: '⩇';
+$point-left: '◀︎';
+$point-right: '▶︎';
+$point-up: '▲';
+$point-down: '▼';
+$log: '✎';
+$control-knobs: '⚙︎';
+$umbrella: '☂️';
+$emojis: (
+	link: #{$link},
+	point-left: #{$point-left},
+	point-right: #{$point-right},
+	point-up: #{$point-up},
+	point-down: #{$point-down},
+	// Feedback emojis
+	default: #{$bunny},
+	info: #{$bulb},
+	success: #{$confetti},
+	warning: #{$bell},
+	error: #{$poop},
+	// App Settings emojis
+	day: #{$sun},
+	night: #{$moon},
+	contrast: #{$half-moon},
+	blend: #{$new-moon},
+	// ButtonMenu fixture emojis
+	vader: #{$invader},
+	ollie: #{$octopus},
+	moby: #{$spouting-whale},
+	// ToggleMenu / RevealMenu fixture emojis
+	idea: #{$bulb},
+	profile: #{$lion},
+	favorite: #{$heart},
+	sparkles: #{$sparkles},
+	// LinkList / Nav / DetailsNav fixture emojis
+	home: #{$egg},
+	about: #{$chick},
+	// Composition Emojis
+	menu: #{$chick},
+	settings: #{$control-knobs},
+	log: #{$log},
+	context: #{$umbrella},
+	switch-active: #{$bunny},
+	switch-inactive: #{$hat},
+	// Playground fixture emojis
+	geometry-2d: #{$ruler},
+);

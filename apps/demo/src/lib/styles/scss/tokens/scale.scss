@@ -1,0 +1,77 @@
+// Adapted from: https://piccalil.li/tutorial/build-a-dashboard-with-cube-css/
+
+// == BASE SIZE
+/// All calculations are based on this. It’s recommended that
+/// you keep it at 1rem because that is the root font size. You
+/// can set it to whatever you like and whatever unit you like.
+///
+$base-size: 1rem;
+
+/// SIZE SCALE
+//  This is a Major Third scale relevant for (font-size, margin, padding).
+// All items are calcuated off the base size, so change that and cascade across the whole project
+$size-scale: (
+	'100': $base-size * 0.6,
+	'200': $base-size * 0.7,
+	'300': $base-size * 0.8,
+	'400': $base-size,
+	'500': $base-size * 1.25,
+	'600': $base-size * 1.6,
+	'700': $base-size * 2,
+	'900': $base-size * 3,
+);
+
+// == FLUID SCALE
+
+/**
+ * Source: https://utopia.fyi/blog/css-modular-scales/
+ * Usage:
+ *  TODO: Doc + link to mixin generate-modular-scale
+ */
+
+$modular-scale-steps-plus: 1, 2, 3, 4;
+
+// prettier-ignore
+$modular-scale-steps-minus: -1, -2;
+$modular-scale: (
+	fluid-min-width: 320,
+	fluid-max-width: 1240,
+
+	// min size of base font
+	fluid-min-size: 14,
+
+	// max size of base font
+	fluid-max-size: 18,
+	fluid-min-ratio: 1.2,
+	fluid-max-ratio: 1.25,
+	fluid-screen: 100vw,
+);
+
+// == TODO: fix // Spacing Scale N to N+1
+$scale-space: (
+	ratio: 1.5,
+	space--3: calc(var(--s-2) / var(--ratio)),
+	space--2: calc(var(--s-1) / var(--ratio)),
+	space--1: calc(var(--s0) / var(--ratio)),
+	space-0: $base-size,
+	space-1: calc(var(--s0) * var(--ratio)),
+	space-2: calc(var(--s1) * var(--ratio)),
+	space-3: calc(var(--s2) * var(--ratio)),
+);
+
+// == TODO: fix // Spacing Scale N to N^X
+$scale-space-pairs: (
+	ratio: 1.5,
+	ratio-lg: 2.75,
+	s-5: calc(var(--s-4) / var(--ratio)),
+	s-4: calc(var(--s-3) / var(--ratio)),
+	s-3: calc(var(--s-2) / var(--ratio)),
+	s-2: calc(var(--s-1) / var(--ratio)),
+	s-1: calc(var(--s0) / var(--ratio)),
+	s0: $base-size,
+	s1: calc(var(--s0) * var(--ratio)),
+	s2: calc(var(--s1) * var(--ratio)),
+	s3: calc(var(--s2) * var(--ratio)),
+	s4: calc(var(--s3) * var(--ratio)),
+	s5: calc(var(--s4) * var(--ratio)),
+);

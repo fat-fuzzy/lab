@@ -1,0 +1,28 @@
+/* App config */
+@forward './pages';
+
+/* SCSS design token definitions */
+@use './scale';
+
+@use './typography';
+@use './layout';
+@use './color';
+@use './assets';
+@use './mixins';
+
+// Generate Tokens
+$theme-prefix: '-'; // creates CSS variables with specific app prefix. Use '--' for no prefix
+
+@include mixins.theme-custom(
+	layout.$breakpoints,
+	layout.$layout,
+	scale.$scale-space-pairs,
+	scale.$size-scale,
+	scale.$modular-scale,
+	scale.$modular-scale-steps-plus,
+	scale.$modular-scale-steps-minus,
+	typography.$typography,
+	color.$colors,
+	assets.$emojis,
+	$theme-prefix
+);
