@@ -10,7 +10,7 @@ import setup from '../../lib/webgl/setup'
 import {drawScene} from './draw-scene'
 import {initBuffers} from './init-buffers'
 
-import {colors} from './shaders/fragment-shader'
+import {channels, blur, defaultFrag} from './shaders/fragment-shader'
 import {vert} from './shaders/vertex-shader-3d'
 
 let host = 'http://localhost:5173'
@@ -85,7 +85,20 @@ function loadTexture(gl, image, {filters}) {
 	// Look up which attribute our shader program is using
 	// for aVertexPosition and look up uniform locations.
 	let program
-	const frag = colors[filters.channels]
+	let frag
+
+	if (filters.channels) {
+		frag = channels[filters.channels]
+	}
+
+	if (filters.blur) {
+		frag = blur[filters.blur]
+	}
+
+	if (!frag) {
+		frag = defaultFrag
+	}
+
 	const vertexShader = setup.compile(gl, gl.VERTEX_SHADER, vert)
 	const fragmentShader = setup.compile(gl, gl.FRAGMENT_SHADER, frag)
 

@@ -133,6 +133,19 @@
 		}
 	}
 
+	const handleToggleBlur = (event: CustomEvent) => {
+		const value = event.detail.selected[0].value
+		if (value === filters.blur) {
+			delete filters.blur
+		} else {
+			filters = {blur: value}
+		}
+
+		if (canvas) {
+			programInfo = scene.main(canvas, {filters})
+		}
+	}
+
 	const handleMouseEvent = (event: MouseEvent) => {
 		scene.update(context, event)
 	}
@@ -241,19 +254,40 @@
 								canvasHeight={canvas.getBoundingClientRect().height}
 								disabled={state === 'pause'}
 							/>
-						{:else if meta?.type === 'texture' && meta?.channels}
-							<ToggleMenu
-								size="xs"
-								layout="switcher"
-								items={meta.channels.map((c) => ({
-									id: c,
-									text: c,
-									value: c,
-									initial: c === filters.channels ? 'pressed' : undefined,
-								}))}
-								on:click={handleToggleChannel}
-								disabled={state === 'pause'}
-							/>
+						{:else if meta?.type === 'texture'}
+							{#if meta?.channels}
+								<ToggleMenu
+									size="xs"
+									layout="switcher"
+									color="primary"
+									variant="bare"
+									items={meta.channels.map((c) => ({
+										id: c,
+										text: c,
+										value: c,
+										initial: c === filters.channels ? 'pressed' : undefined,
+									}))}
+									on:click={handleToggleChannel}
+									disabled={state === 'pause'}
+								/>
+							{/if}
+							{#if meta?.blur}
+								<ToggleMenu
+									size="xs"
+									mode="check"
+									layout="switcher"
+									color="accent"
+									variant="bare"
+									items={meta.blur.map((b) => ({
+										id: b,
+										text: b,
+										value: b,
+										initial: b === filters.blur ? 'pressed' : undefined,
+									}))}
+									on:click={handleToggleBlur}
+									disabled={state === 'pause'}
+								/>
+							{/if}
 						{/if}
 					</div>
 				{/if}

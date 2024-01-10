@@ -141,6 +141,7 @@ export const sketches = [
 				'grab',
 				'grba',
 			],
+			blur: ['blur.1', 'blur.2', 'blur.3'],
 		},
 	},
 ]

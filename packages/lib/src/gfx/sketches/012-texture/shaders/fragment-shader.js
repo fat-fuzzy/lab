@@ -1,3 +1,25 @@
+const defaultFrag = `#version 300 es
+//FRAGMENT SHADER
+
+// fragment shaders don't have a default precision so we need
+// to pick one
+precision highp float;
+
+// our texture
+uniform sampler2D u_image;
+
+// the texCoords passed in from the vertex shader
+in vec2 v_texCoord;
+
+// We need to declare an output for the fragment shader
+out vec4 outColor;
+
+void main() {
+	// Look up a color from the texture
+	outColor = texture(u_image, v_texCoord);
+}
+`
+
 function swapChannels(channels) {
 	return `#version 300 es
   //FRAGMENT SHADER
@@ -22,7 +44,36 @@ function swapChannels(channels) {
   `
 }
 
-const colors = {
+function applyBlur(blurLevel) {
+	return `#version 300 es
+  //FRAGMENT SHADER
+
+  // fragment shaders don't have a default precision so we need
+  // to pick one
+  precision highp float;
+
+  // our texture
+  uniform sampler2D u_image;
+
+  // the texCoords passed in from the vertex shader
+  in vec2 v_texCoord;
+
+  // We need to declare an output for the fragment shader
+  out vec4 outColor;
+
+  void main() {
+		vec2 pixels = vec2(${blurLevel}) / vec2(textureSize(u_image, 0));
+
+    // Average the left, middle, and right pixels
+    outColor = (
+			texture(u_image, v_texCoord) +
+			texture(u_image, v_texCoord + vec2( pixels.x / 2.0,  pixels.y / 2.0)) +
+			texture(u_image, v_texCoord + vec2(-pixels.x / 2.0, -pixels.y / 2.0))) / 3.0;
+  }
+  `
+}
+
+const channels = {
 	ragb: swapChannels('ragb'),
 	rabg: swapChannels('rabg'),
 	rbag: swapChannels('rbag'),
@@ -49,4 +100,10 @@ const colors = {
 	grba: swapChannels('grba'),
 }
 
-export {colors}
+const blur = {
+	'blur.1': applyBlur('1'),
+	'blur.2': applyBlur('2'),
+	'blur.3': applyBlur('3'),
+}
+
+export {channels, blur, defaultFrag}
