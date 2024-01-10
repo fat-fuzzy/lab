@@ -245,7 +245,12 @@
 							<ToggleMenu
 								size="xs"
 								layout="switcher"
-								items={meta.channels.map((c) => ({id: c, text: c, value: c}))}
+								items={meta.channels.map((c) => ({
+									id: c,
+									text: c,
+									value: c,
+									initial: c === filters.channels ? 'pressed' : undefined,
+								}))}
 								on:click={handleToggleChannel}
 							/>
 						{/if}
