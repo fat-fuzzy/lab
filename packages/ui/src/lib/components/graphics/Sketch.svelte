@@ -38,6 +38,7 @@
 	let state = 'clear'
 	let filters: Filters = {
 		channels: 'rgba',
+		blur: undefined,
 	}
 
 	function degToRad(degrees: number) {
@@ -45,6 +46,8 @@
 	}
 
 	$: state = feedback ? `${feedback.status}` : state
+	$: blur = filters.blur
+	$: channels = filters.channels
 	$: showGeometry =
 		context !== undefined &&
 		scene.meta?.type !== 'texture' &&
@@ -138,7 +141,7 @@
 		if (value === filters.blur) {
 			delete filters.blur
 		} else {
-			filters = {blur: value}
+			filters = {blur: value, channels: 'rgba'}
 		}
 
 		if (canvas) {
@@ -256,37 +259,41 @@
 							/>
 						{:else if meta?.type === 'texture'}
 							{#if meta?.channels}
-								<ToggleMenu
-									size="xs"
-									layout="switcher"
-									color="primary"
-									variant="bare"
-									items={meta.channels.map((c) => ({
-										id: c,
-										text: c,
-										value: c,
-										initial: c === filters.channels ? 'pressed' : undefined,
-									}))}
-									on:click={handleToggleChannel}
-									disabled={state === 'pause'}
-								/>
+								{#key blur}
+									<ToggleMenu
+										size="xs"
+										layout="switcher"
+										color="primary"
+										variant="bare"
+										items={meta.channels.map((c) => ({
+											id: c,
+											text: c,
+											value: c,
+											initial: c === filters.channels ? 'pressed' : undefined,
+										}))}
+										on:click={handleToggleChannel}
+										disabled={state === 'pause'}
+									/>
+								{/key}
 							{/if}
 							{#if meta?.blur}
-								<ToggleMenu
-									size="xs"
-									mode="check"
-									layout="switcher"
-									color="accent"
-									variant="bare"
-									items={meta.blur.map((b) => ({
-										id: b,
-										text: b,
-										value: b,
-										initial: b === filters.blur ? 'pressed' : undefined,
-									}))}
-									on:click={handleToggleBlur}
-									disabled={state === 'pause'}
-								/>
+								{#key channels}
+									<ToggleMenu
+										size="xs"
+										mode="check"
+										layout="switcher"
+										color="accent"
+										variant="bare"
+										items={meta.blur.map((b) => ({
+											id: b,
+											text: b,
+											value: b,
+											initial: b === filters.blur ? 'pressed' : undefined,
+										}))}
+										on:click={handleToggleBlur}
+										disabled={state === 'pause'}
+									/>
+								{/key}
 							{/if}
 						{/if}
 					</div>
