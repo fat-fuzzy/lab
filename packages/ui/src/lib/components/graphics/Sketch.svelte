@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type {Scene, SketchProps, SceneMeta} from '$lib/types'
+	import type {Scene, SketchProps, SceneMeta, Filters} from '$lib/types'
 
 	import {afterUpdate, onDestroy} from 'svelte'
 
@@ -8,6 +8,7 @@
 	import FieldOfView from '$lib/components/graphics/FieldOfView.svelte'
 	import Camera from '$lib/components/graphics/Camera.svelte'
 	import Player from '$lib/components/graphics/Player.svelte'
+	import ToggleMenu from '../recipes/menus/ToggleMenu.svelte'
 
 	export let id = 'sketch'
 	export let scene: Scene
@@ -35,6 +36,9 @@
 
 	let frame: number
 	let state = 'clear'
+	let filters: Filters = {
+		channels: 'rgba',
+	}
 
 	function degToRad(degrees: number) {
 		return degrees * (Math.PI / 180)
@@ -56,7 +60,7 @@
 	function init() {
 		if (canvas) {
 			try {
-				programInfo = scene.main(canvas)
+				programInfo = scene.main(canvas, {filters})
 				if (state === 'clear' || !context) {
 					context = programInfo.context
 				}
@@ -118,6 +122,14 @@
 			case 'clear':
 				clear()
 				break
+		}
+	}
+
+	const handleToggleChannel = (event: CustomEvent) => {
+		filters = {channels: event.detail.selected[0].value}
+
+		if (canvas) {
+			programInfo = scene.main(canvas, {filters})
 		}
 	}
 
@@ -228,6 +240,13 @@
 								canvasWidth={canvas.getBoundingClientRect().width}
 								canvasHeight={canvas.getBoundingClientRect().height}
 								disabled={state === 'pause'}
+							/>
+						{:else if meta?.type === 'texture' && meta?.channels}
+							<ToggleMenu
+								size="xs"
+								layout="switcher"
+								items={meta.channels.map((c) => ({id: c, text: c, value: c}))}
+								on:click={handleToggleChannel}
 							/>
 						{/if}
 					</div>

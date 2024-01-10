@@ -56,6 +56,16 @@ export type SceneMeta = {
 	type: string
 	camera: number
 	filename?: string
+	channels?: string[]
+}
+
+export type Filters = {
+	channels?: string
+}
+
+export type SceneInput = {
+	url?: string
+	filters: Filters
 }
 
 export type Scene = {
@@ -63,6 +73,6 @@ export type Scene = {
 	draw: () => void
 	clear: () => void
 	update: (value: SketchProps, event?: MouseEvent | TouchEvent) => void
-	main: (canvas: HTMLCanvasElement, image?: any) => ProgramInfo
+	main: (canvas: HTMLCanvasElement, input?: SceneInput) => ProgramInfo
 	meta?: SceneMeta
 }

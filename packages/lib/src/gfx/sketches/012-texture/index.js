@@ -10,7 +10,7 @@ import setup from '../../lib/webgl/setup'
 import {drawScene} from './draw-scene'
 import {initBuffers} from './init-buffers'
 
-import {frag} from './shaders/fragment-shader'
+import {colors} from './shaders/fragment-shader'
 import {vert} from './shaders/vertex-shader-3d'
 
 let host = 'http://localhost:5173'
@@ -43,7 +43,7 @@ function clear() {
 	gl.depthFunc(gl.LEQUAL) // near things obscure far things
 }
 
-function main(canvas) {
+function main(canvas, {filters}) {
 	// Initialize the GL context
 	gl = canvas.getContext('webgl2')
 
@@ -56,7 +56,7 @@ function main(canvas) {
 	image.src = imagePath
 
 	image.onload = () => {
-		loadTexture(gl, image)
+		loadTexture(gl, image, {filters})
 	}
 
 	return {
@@ -77,7 +77,7 @@ function draw(t) {
 // Initialize a texture and load an image.
 // When the image finished loading copy it into the texture.
 //
-function loadTexture(gl, image) {
+function loadTexture(gl, image, {filters}) {
 	// Collect all the info needed to use the shader program.
 	// Look up which attribute our shader program is using
 	// for aVertexPosition and look up uniform locations.
@@ -85,6 +85,7 @@ function loadTexture(gl, image) {
 	// Look up which attribute our shader program is using
 	// for aVertexPosition and look up uniform locations.
 	let program
+	const frag = colors[filters.channels]
 	const vertexShader = setup.compile(gl, gl.VERTEX_SHADER, vert)
 	const fragmentShader = setup.compile(gl, gl.FRAGMENT_SHADER, frag)
 
