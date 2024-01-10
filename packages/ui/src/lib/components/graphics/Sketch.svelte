@@ -46,8 +46,6 @@
 	}
 
 	$: state = feedback ? `${feedback.status}` : state
-	$: blur = filters.blur
-	$: channels = filters.channels
 	$: showGeometry =
 		context !== undefined &&
 		scene.meta?.type !== 'texture' &&
@@ -94,6 +92,10 @@
 	const clear = () => {
 		cancelAnimationFrame(frame)
 		scene.clear()
+		filters = {
+			channels: 'rgba',
+			blur: undefined,
+		}
 	}
 
 	const pause = () => {
@@ -129,7 +131,12 @@
 	}
 
 	const handleToggleChannel = (event: CustomEvent) => {
-		filters = {channels: event.detail.selected[0].value}
+		const value = event.detail.selected[0].value
+
+		filters = {
+			channels: value,
+			blur: undefined,
+		}
 
 		if (canvas) {
 			programInfo = scene.main(canvas, {filters})
@@ -138,10 +145,11 @@
 
 	const handleToggleBlur = (event: CustomEvent) => {
 		const value = event.detail.selected[0].value
+
 		if (value === filters.blur) {
-			delete filters.blur
+			filters.blur = undefined
 		} else {
-			filters = {blur: value, channels: 'rgba'}
+			filters.blur = value
 		}
 
 		if (canvas) {
@@ -259,41 +267,37 @@
 							/>
 						{:else if meta?.type === 'texture'}
 							{#if meta?.channels}
-								{#key blur}
-									<ToggleMenu
-										size="xs"
-										layout="switcher"
-										color="primary"
-										variant="bare"
-										items={meta.channels.map((c) => ({
-											id: c,
-											text: c,
-											value: c,
-											initial: c === filters.channels ? 'pressed' : undefined,
-										}))}
-										on:click={handleToggleChannel}
-										disabled={state === 'pause'}
-									/>
-								{/key}
+								<ToggleMenu
+									size="xs"
+									layout="switcher"
+									color="primary"
+									variant="bare"
+									items={meta.channels.map((c) => ({
+										id: c,
+										text: c,
+										value: c,
+										initial: c === filters.channels ? 'pressed' : undefined,
+									}))}
+									on:click={handleToggleChannel}
+									disabled={state === 'pause'}
+								/>
 							{/if}
 							{#if meta?.blur}
-								{#key channels}
-									<ToggleMenu
-										size="xs"
-										mode="check"
-										layout="switcher"
-										color="accent"
-										variant="bare"
-										items={meta.blur.map((b) => ({
-											id: b,
-											text: b,
-											value: b,
-											initial: b === filters.blur ? 'pressed' : undefined,
-										}))}
-										on:click={handleToggleBlur}
-										disabled={state === 'pause'}
-									/>
-								{/key}
+								<ToggleMenu
+									size="xs"
+									mode="check"
+									layout="switcher"
+									color="accent"
+									variant="bare"
+									items={meta.blur.map((b) => ({
+										id: b,
+										text: b,
+										value: b,
+										initial: b === filters.blur ? 'pressed' : undefined,
+									}))}
+									on:click={handleToggleBlur}
+									disabled={state === 'pause'}
+								/>
 							{/if}
 						{/if}
 					</div>

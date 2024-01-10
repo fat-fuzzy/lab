@@ -44,7 +44,7 @@ function swapChannels(channels) {
   `
 }
 
-function applyBlur(blurLevel) {
+function applyBlur(level) {
 	return `#version 300 es
   //FRAGMENT SHADER
 
@@ -62,7 +62,7 @@ function applyBlur(blurLevel) {
   out vec4 outColor;
 
   void main() {
-		vec2 pixels = vec2(${blurLevel}) / vec2(textureSize(u_image, 0));
+		vec2 pixels = vec2(${level}) / vec2(textureSize(u_image, 0));
 
     // Average the left, middle, and right pixels
     outColor = (
