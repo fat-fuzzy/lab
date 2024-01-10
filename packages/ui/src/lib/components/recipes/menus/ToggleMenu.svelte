@@ -17,6 +17,7 @@
 	export let mode = 'radio'
 	export let formaction: string | undefined = undefined
 	export let items: any = [] // TODO fix types
+	export let disabled = false
 
 	let selected: {
 		id: string
@@ -94,7 +95,8 @@
 						size={props.size ?? size}
 						shape={props.shape ?? shape}
 						asset={props.asset ?? asset}
-						disabled={mode === 'radio' && selected[0] && selected[0].value === props.value
+						disabled={disabled ||
+						(mode === 'radio' && selected[0] && selected[0].value === props.value)
 							? true
 							: false}
 					/>
@@ -117,7 +119,8 @@
 					size={props.size ?? size}
 					shape={props.shape ?? shape}
 					asset={props.asset ?? asset}
-					disabled={mode === 'radio' && selected[0] && selected[0].value === props.value
+					disabled={disabled ||
+					(mode === 'radio' && selected[0] && selected[0].value === props.value)
 						? true
 						: false}
 				/>

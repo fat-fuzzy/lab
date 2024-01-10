@@ -30,6 +30,7 @@
 	export let formaction: string | undefined = undefined
 	export let actionPath: string | undefined = undefined
 	export let redirect: string | undefined = undefined
+	export let disabled = false
 
 	export let items: any = []
 
@@ -121,7 +122,7 @@
 	>
 		{#each items as buttonProps}
 			<li>
-				<Button {onClick} {...buttonProps} variant={innerVariant} {color} />
+				<Button {onClick} {...buttonProps} variant={innerVariant} {color} {disabled} />
 			</li>
 		{/each}
 	</menu>

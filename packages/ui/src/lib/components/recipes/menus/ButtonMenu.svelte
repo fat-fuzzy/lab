@@ -14,6 +14,7 @@
 	export let asset = ''
 	export let formaction: string | undefined = undefined
 	export let items: any = [] // TODO Fix type
+	export let disabled = false
 
 	const onClick = (event: CustomEvent) => {
 		dispatch('click', event.detail)
@@ -40,6 +41,7 @@
 						variant={itemVariant}
 						size={itemSize}
 						asset={itemAsset}
+						{disabled}
 					/>
 				</li>
 			{/each}
@@ -62,6 +64,7 @@
 					variant={itemVariant}
 					size={itemSize}
 					asset={itemAsset}
+					{disabled}
 				/>
 			</li>
 		{/each}

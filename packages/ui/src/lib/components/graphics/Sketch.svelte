@@ -252,6 +252,7 @@
 									initial: c === filters.channels ? 'pressed' : undefined,
 								}))}
 								on:click={handleToggleChannel}
+								disabled={state === 'pause'}
 							/>
 						{/if}
 					</div>
